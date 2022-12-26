@@ -66,6 +66,15 @@ require('packer').startup(function(use)
   --use "hrsh7th/nvim-cmp"
   use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
+  -- vimtex
+  use {'lervag/vimtex',
+    config = function()
+      vim.cmd([[
+        let g:vimtex_view_method = 'zathura'
+      ]])
+    end
+  }
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
