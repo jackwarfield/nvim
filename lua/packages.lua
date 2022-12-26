@@ -10,6 +10,7 @@ end
 require('packer').startup(function(use)
   -- Package manager
   use 'wbthomason/packer.nvim'
+
   use 'ggandor/leap.nvim'
 
   use { -- LSP Configuration & Plugins
@@ -60,6 +61,10 @@ require('packer').startup(function(use)
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+
+  -- tabnine
+  --use "hrsh7th/nvim-cmp"
+  use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -425,6 +430,20 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+-- tabnine activate?
+require'cmp'.setup {
+ sources = {
+ 	{ name = 'cmp_tabnine' },
+ },
+}
+local tabnine = require 'cmp_tabnine.config'
+tabnine:setup({
+  run_on_every_keystroke = true,
+  max_num_results = 20,
+  show_prediction_strength = true,
+})
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

@@ -1,14 +1,14 @@
 lua require("packages")
 
 "Vundle
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tabnine/YouCompleteMe'
-call vundle#end()
-filetype plugin indent on
+"set nocompatible
+"filetype off
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
+"Plugin 'VundleVim/Vundle.vim'
+"Plugin 'tabnine/YouCompleteMe'
+"call vundle#end()
+"filetype plugin indent on
 
 "Plugin 'file:///Users/jtw5zc/YouCompleteMe'
 
@@ -157,11 +157,11 @@ vnoremap ,c "+y
 nnoremap ,v "+p
 noremap ,l :ccl<ENTER>
 
-call plug#begin('~/.vim/plugged')
-Plug 'lervag/vimtex'
-let g:vimtex_view_method = 'zathura'
-"Plug 'tzachar/cmp-tabnine'
-call plug#end()
+"call plug#begin('~/.vim/plugged')
+"Plug 'lervag/vimtex'
+"let g:vimtex_view_method = 'zathura'
+""Plug 'tzachar/cmp-tabnine'
+"call plug#end()
 
 "Typewriter mode
 "set so=99
