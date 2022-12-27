@@ -5,4 +5,5 @@ setlocal expandtab
 syntax on
 
 command RePyIm !reorder-python-imports %:t
+command RPI !reorder-python-imports %:t
 command Black !black %:t
