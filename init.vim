@@ -72,7 +72,7 @@ map ;2B <S-Down>
 
 " Execute current buffer in python if in normal mode and press ,p
 "autocmd FileType python map <buffer> ,p :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-autocmd FileType python map <buffer> ,p :w<CR>:exec '!ipy' shellescape(@%, 1)<CR>
+autocmd FileType python map <buffer> ,p :w<CR>:exec '!py' shellescape(@%, 1)<CR>
 " autocmd FileType python imap <buffer> ,p <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
 "Mode Settings
