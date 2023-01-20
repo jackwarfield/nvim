@@ -57,9 +57,11 @@ augroup SpellUnderline
 augroup END
 
 "By-line scrolling based on screen positon rather than line number
-nmap j gjzz
-nmap k gkzz
-nmap G Gzz
+nmap j gj
+nmap k gk
+"nmap j gjzz
+"nmap k gkzz
+"nmap G Gzz
 
 "Make sure that Shift-Arrow Key does what I want it to do when running through
 "tmux
@@ -163,4 +165,7 @@ noremap ,t :tabn<CR>
 "call plug#end()
 
 "Typewriter mode
-"set so=99
+set so=99
+"nmap j gjzz
+"nmap k gkzz
+"nmap G Gzz
