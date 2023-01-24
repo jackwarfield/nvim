@@ -139,8 +139,8 @@ let g:netrw_banner=0        " disable annoying banner
 let g:netrw_browse_split=4  " open in prior window
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
-let g:netrw_list_hide=0 "netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+"let g:netrw_list_hide=2 "netrw_gitignore#Hide()
+"let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
 " NOW WE CAN:
 " - :edit a folder to open a file browser
@@ -169,3 +169,7 @@ set so=99
 "nmap j gjzz
 "nmap k gkzz
 "nmap G Gzz
+
+"resize splits by 5 with SPACE plus minus
+nnoremap <silent> <Leader>+ :exe "vertical resize +5"<CR>
+nnoremap <silent> <Leader>- :exe "vertical resize -5"<CR>
