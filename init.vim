@@ -173,3 +173,6 @@ set so=99
 "resize splits by 5 with SPACE plus minus
 nnoremap <silent> <Leader>+ :exe "vertical resize +5"<CR>
 nnoremap <silent> <Leader>- :exe "vertical resize -5"<CR>
+
+"vimtex stuff
+let g:vimtex_view_general_viewer = 'zathura'
