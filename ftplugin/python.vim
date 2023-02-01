@@ -8,9 +8,9 @@ setlocal expandtab
 let g:python_indent = {}
 let g:python_indent.closed_paren_align_last_line = v:false
 
-command RePyIm !reorder-python-imports %:t
-command RPI !reorder-python-imports %:t
-command Black !black %:t
+command RePyIm !reorder-python-imports %:p
+command RPI !reorder-python-imports %:p
+command Black !black %:p
 command Mpldef r /Users/jtw5zc/.config/nvim/inserts/mplinsert.py
 command Mainfunc r /Users/jtw5zc/.config/nvim/inserts/main_function.py
 
