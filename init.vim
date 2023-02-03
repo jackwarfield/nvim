@@ -158,7 +158,7 @@ vnoremap ,c "+y
 nnoremap ,v "+p
 noremap ,l :ccl<ENTER>
 noremap ,t :tabn<CR>
-noremap ,y :tabl<CR>
+noremap ,y :tabp<CR>
 
 "call plug#begin('~/.vim/plugged')
 "Plug 'lervag/vimtex'
