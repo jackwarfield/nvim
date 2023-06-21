@@ -11,7 +11,7 @@ lua require("packages")
 
 "Plugin 'file:///Users/jtw5zc/YouCompleteMe'
 
-set background=dark
+set background=light
 
 "Tabnine autocomplete
 "set rtp+=~/tabnine-vim
@@ -177,3 +177,23 @@ nnoremap <silent> <Leader>- :exe "vertical resize -5"<CR>
 
 "vimtex stuff
 let g:vimtex_view_general_viewer = 'zathura'
+
+"delete in normal mode to replace word in cursor
+nnoremap <BS> ciw
+"delete in visual mode is same as c
+vnoremap <BS> c
+"enter in normal mode is the same as o
+nnoremap <CR> o
+"don't bounce back on yank
+vnoremap y ygv<esc>
+
+"make splits in intuitive direction
+set splitbelow
+set splitright
+"cycle splits in normal mode with tab
+nnoremap <tab> <c-w>w
+
+"U to redo
+nnoremap U :redo<CR>
+
+"colorscheme midnight
