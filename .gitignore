@@ -1,2 +1,4 @@
 plugin/*
 lua/.luarc.json
+.DS_Store
+**/.DS_Store
