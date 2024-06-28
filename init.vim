@@ -11,7 +11,7 @@ lua require("packages")
 
 "Plugin 'file:///Users/jtw5zc/YouCompleteMe'
 
-set background=light
+"set background=dark
 
 "Tabnine autocomplete
 "set rtp+=~/tabnine-vim
@@ -73,6 +73,8 @@ map ;2B <S-Down>
 " Execute current buffer in python if in normal mode and press ,p
 "autocmd FileType python map <buffer> ,p :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python map <buffer> ,p :w<CR>:exec '!py' shellescape(@%, 1)<CR>
+autocmd FileType idlang map <buffer> ,p :w<CR>:exec '!idl' shellescape(@%, 1)<CR>
+autocmd FileType go map <buffer> ,p :w<CR>:exec '!go run' shellescape(@%, 1)<CR>
 " autocmd FileType python imap <buffer> ,p <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
 "Mode Settings
@@ -107,6 +109,7 @@ set colorcolumn=80
 "colo default
 
 set number
+set relativenumber
 set ruler
 
 set backspace=indent,eol,start 
@@ -196,4 +199,25 @@ nnoremap <tab> <c-w>w
 "U to redo
 nnoremap U :redo<CR>
 
-"colorscheme midnight
+"toggle nvim-tree
+nnoremap <C-f> :NvimTreeToggle<CR>
+
+if (strftime("%H") < 17) * (strftime("%H") > 6)
+  set background=light
+  "colorscheme catppuccin-latte
+  "colorscheme peachpuff
+  colorscheme gruvbox
+else
+  set background=dark
+  "colorscheme midnight
+  colorscheme one_monokai
+  "colorscheme onedark
+  colorscheme pencil
+  let g:pencil_higher_contrast_ui = 1
+  "let g:pencil_terminal_italics = 1
+endif
+
+set noswapfile
+
+"set number
+"set relativenumber
