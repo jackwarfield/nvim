@@ -1,10 +1,13 @@
 "let g:vimtex_view_method = 'zathura'
 
+filetype plugin indent on
+syntax enable
+
 set spell spelllang=en_us
 set cc=
 set linebreak
 
-set background=light
+"set background=light
 hi clear SpellBad
 hi SpellBad ctermfg=red ctermbg=NONE cterm=underline,bold
 hi clear SpellLocal
