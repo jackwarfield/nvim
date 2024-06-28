@@ -1,92 +1,124 @@
 -- Install packer
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   is_bootstrap = true
-  vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
-  vim.cmd [[packadd packer.nvim]]
+  vim.fn.system { 
+      'git',
+      'clone',
+      '--filter=blob:none',
+      'https://github.com/folke/lazy.nvim.git',
+      '--branch=stable',
+      install_path
+  }
+  --vim.cmd [[packadd lazy.nvim]]
 end
+vim.opt.rtp:prepend(install_path)
 
-require('packer').startup(function(use)
+require('lazy').setup({
   -- Package manager
-  use 'wbthomason/packer.nvim'
+  { 'wbthomason/packer.nvim' },
 
-  use 'ggandor/leap.nvim'
+  { 'ggandor/leap.nvim' },
 
-  use { -- LSP Configuration & Plugins
+  { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
-    requires = {
+    dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
 
       -- Useful status updates for LSP
       {'j-hui/fidget.nvim', tag = 'legacy'},
 
       -- Additional lua configuration, makes nvim stuff amazing
-      'folke/neodev.nvim',
-    },
-  }
+      { 'folke/neodev.nvim' },
+    }
+  },
 
-  use { 'dasupradyumna/midnight.nvim' }
+  { 'dasupradyumna/midnight.nvim' },
+  { 'cpea2506/one_monokai.nvim' },
+  { 'olimorris/onedarkpro.nvim' },
+  { 'catppuccin/nvim', as = "catppuccin" },
+  { 'ellisonleao/gruvbox.nvim' },
+  { 'preservim/vim-colors-pencil' },
 
-  use { -- Autocompletion
+  { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
-  }
+    dependencies = { 
+        { 'hrsh7th/cmp-nvim-lsp' }, 
+        { 'L3MON4D3/LuaSnip' },
+        { 'saadparwaiz1/cmp_luasnip' },
+    }
+  },
 
-  use { -- Highlight, edit, and navigate code
+  { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    run = function()
+    build = function()
       pcall(require('nvim-treesitter.install').update { with_sync = true })
     end,
-  }
+  },
 
-  use { -- Additional text objects via treesitter
+  { -- Additional text objects via treesitter
     'nvim-treesitter/nvim-treesitter-textobjects',
-    after = 'nvim-treesitter',
-  }
+    after = 'nvim-treesitter'
+  },
 
   -- Git related plugins
-  use 'tpope/vim-fugitive'
-  use 'tpope/vim-rhubarb'
-  use 'lewis6991/gitsigns.nvim'
+  { 'tpope/vim-fugitive' },
+  { 'tpope/vim-rhubarb' },
+  { 'lewis6991/gitsigns.nvim' },
 
 --  use 'navarasu/onedark.nvim' -- Theme inspired by Atom
-  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
-  use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
-  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = {'nvim-tree/nvim-web-devicons'}
+  }, -- Fancier statusline
+  {'lukas-reineke/indent-blankline.nvim', tag = 'v2.20.8'}, -- Add indentation guides even on blank lines
+  { 'numToStr/Comment.nvim' }, -- "gc" to comment visual regions/lines
+  { 'tpope/vim-sleuth' }, -- Detect tabstop and shiftwidth automatically
 
   -- Fuzzy Finder (files, lsp, etc)
-  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
+  { 'nvim-telescope/telescope.nvim',
+     branch = '0.1.x',
+     dependencies = { 'nvim-lua/plenary.nvim' }
+  },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', cond = vim.fn.executable 'make' == 1 },
 
   -- tabnine
   --use "hrsh7th/nvim-cmp"
-  use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+  {'tzachar/cmp-tabnine', build='./install.sh', dependencies = 'hrsh7th/nvim-cmp'},
 
   -- vimtex
-  use {'lervag/vimtex',
-    config = function()
-      vim.cmd([[
-        let g:vimtex_view_method = 'zathura'
-      ]])
+  {'lervag/vimtex',
+    lazy = false,
+    init = function()
+      vim.g.vimtex_view_method = 'zathura'
     end
-  }
+  },
+
+  -- nvim-tree
+  {'nvim-tree/nvim-tree.lua',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons', -- optional
+    }
+  },
+
+  ---- mini.files
+  --use 'echasnovski/mini.files'
+
+  -- greeter
+  { 'goolord/alpha-nvim' },
+
+  -- speedup
+  { 'lewis6991/impatient.nvim' },
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
-  local has_plugins, plugins = pcall(require, 'custom.plugins')
-  if has_plugins then
-    plugins(use)
-  end
+})
 
-  if is_bootstrap then
-    require('packer').sync()
-  end
-end)
+require "impatient"
 
 -- When we are bootstrapping a configuration, it doesn't
 -- make sense to execute the rest of the init.lua.
@@ -102,12 +134,12 @@ if is_bootstrap then
 end
 
 -- Automatically source and re-compile packer whenever you save this init.lua
-local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source <afile> | PackerCompile',
-  group = packer_group,
-  pattern = vim.fn.expand '$MYVIMRC',
-})
+-- local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
+-- vim.api.nvim_create_autocmd('BufWritePost', {
+--   command = 'source <afile> | PackerCompile',
+--   group = packer_group,
+--   pattern = vim.fn.expand '$MYVIMRC',
+-- })
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -238,7 +270,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'julia' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'vimdoc', 'julia' },
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
@@ -455,6 +487,34 @@ tabnine:setup({
   show_prediction_strength = true,
 })
 
+--require('mini.files').setup()
+
+
+-- disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+--vim.opt.termguicolors = true
+--require("nvim-tree").setup()
+
+require("onedarkpro").setup({
+  styles = {
+    types = "NONE",
+    methods = "NONE",
+    numbers = "NONE",
+    strings = "NONE",
+    comments = "italic",
+    keywords = "bold,italic",
+    constants = "NONE",
+    functions = "italic",
+    operators = "NONE",
+    variables = "NONE",
+    parameters = "NONE",
+    conditionals = "italic",
+    virtual_text = "NONE",
+  }
+})
+
+require "alpha".setup(require'alpha.themes.startify'.config)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
